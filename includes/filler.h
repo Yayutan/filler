@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef FILLER_H
 # define FILLER_H
 # include "libft.h"
@@ -18,29 +17,25 @@
 # include "get_next_line.h"
 # include <unistd.h>
 
+typedef struct		s_coor
+{
+	int				x;
+	int				y;
+}					t_coor;
 
+typedef struct		s_filler
+{
+	int				m_r;
+	int				m_c;
+	char			**map;
+	char			py;
+	int				p_r;
+	int				p_c;
+	char			**pc;
+}					t_filler;
 
-
-/////
-#include <fcntl.h>
-
-////
-
-typedef struct 			s_filler
-{			
-	int					m_r;
-	int					m_c;
-	char				**map;
-	char				py;
-	int					p_r;
-	int					p_c;
-	char				**pc;
-	int 				fd; /// for debug
-}						t_filler;
-
-
-
-int					setup_py_map(t_filler *fr);
+int					setup_map(t_filler *fr);
 int					setup_piece(t_filler *fr);
+void				put_piece(t_filler *fr);
 
 #endif

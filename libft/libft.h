@@ -99,4 +99,6 @@ char				*ft_strup(char *s);
 char				*ft_stradd(char *s, char t, int m, int n);
 char				*ft_strtrimc(char const *s, char c);
 void				ft_err_exit(char *msg);
+void				ft_free_two_d_a(void **arr);
+
 #endif

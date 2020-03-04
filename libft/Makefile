@@ -78,7 +78,8 @@ SRC =   ft_atoi.c\
 		ft_strtrimc.c\
 		get_next_line.c\
 		stack.c\
-		queue.c
+		queue.c\
+		ft_free_two_d_a.c
 SRC_PATH = ./
 
 OBJ_PATH = ./lft_objs/

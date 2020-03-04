@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_free_two_d_a.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchuang <mchuang@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/21 10:16:55 by mchuang           #+#    #+#             */
-/*   Updated: 2019/09/21 10:16:57 by mchuang          ###   ########.fr       */
+/*   Created: 2020/03/03 21:36:29 by mchuang           #+#    #+#             */
+/*   Updated: 2020/03/03 21:36:42 by mchuang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft.h"
-# define BUFF_SIZE 1
-# define FD_LIMIT 4864
+#include "libft.h"
 
-int get_next_line(const int fd, char **line);
+void				ft_free_two_d_a(void **arr)
+{
+	int				i;
 
-#endif
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
