@@ -13,6 +13,16 @@
 
 #include "filler.h"
 
+static void			clean_map_pc(t_filler *fr)
+{
+	if (fr->map)
+		ft_free_two_d_a((void**)fr->map);
+	if (fr->pc)
+		ft_free_two_d_a((void**)fr->pc);
+	fr->map = NULL;
+	fr->pc = NULL;
+}
+
 static t_filler		init_filler(void)
 {
 	t_filler		fr;
@@ -24,6 +34,7 @@ static t_filler		init_filler(void)
 	fr.p_r = -1;
 	fr.p_c = -1;
 	fr.pc = NULL;
+	fr.avail = NULL;
 	return (fr);
 }
 
@@ -40,8 +51,11 @@ int					main(void)
 	{
 		if (setup_map(&fr) < 0 || setup_piece(&fr) < 0)
 			break;
-		// update_stats(&fr); // count p1p2 piece...
 		put_piece(&fr);
+		clean_map_pc(&fr);
 	}
+	clean_map_pc(&fr);
+	if (fr.avail)
+		free(fr.avail);
 	return (0);
 }

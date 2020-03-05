@@ -85,7 +85,7 @@ static int			read_piece(t_filler *fr)
 	return (0);
 }
 
-int			setup_piece(t_filler *fr)
+int					setup_piece(t_filler *fr)
 {
 	char			*line;
 	char			**pt;

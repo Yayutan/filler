@@ -17,11 +17,17 @@
 # include "get_next_line.h"
 # include <unistd.h>
 
-typedef struct		s_coor
+typedef struct		s_pt
 {
 	int				x;
 	int				y;
-}					t_coor;
+}					t_pt;
+
+typedef struct 		s_option
+{
+	t_pt			pt;
+	int				score;
+}					t_option;
 
 typedef struct		s_filler
 {
@@ -32,6 +38,8 @@ typedef struct		s_filler
 	int				p_r;
 	int				p_c;
 	char			**pc;
+	t_option		*avail;
+	int				av_ct;
 }					t_filler;
 
 int					setup_map(t_filler *fr);
