@@ -19,8 +19,11 @@ static void			clean_map_pc(t_filler *fr)
 		ft_free_two_d_a((void**)fr->map);
 	if (fr->pc)
 		ft_free_two_d_a((void**)fr->pc);
+	if (fr->avail)
+		free(fr->avail);
 	fr->map = NULL;
 	fr->pc = NULL;
+	fr->avail = NULL;
 }
 
 static t_filler		init_filler(void)
@@ -55,7 +58,5 @@ int					main(void)
 		clean_map_pc(&fr);
 	}
 	clean_map_pc(&fr);
-	if (fr.avail)
-		free(fr.avail);
 	return (0);
 }

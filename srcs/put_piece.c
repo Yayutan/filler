@@ -26,13 +26,10 @@ static int			try_piece(t_filler *fr, t_pt st)
 		{
 			if (fr->pc[p_cur.y][p_cur.x] == '*')
 			{
-				if (st.x + p_cur.x < 0 || st.y + p_cur.y < 0 ||
-					st.x + p_cur.x >= fr->m_c || st.y + p_cur.y >= fr->m_r)
-					return (0);
-				if (fr->map[st.y + p_cur.y][st.x + p_cur.x] == fr->py ||
-					fr->map[st.y + p_cur.y][st.x + p_cur.x] == fr->py + 32)
+				if (fr->map[(st.y + p_cur.y + fr->m_r) % fr->m_r][(st.x + p_cur.x + fr->m_c) % fr->m_c] == fr->py ||
+					fr->map[(st.y + p_cur.y + fr->m_r) % fr->m_r][(st.x + p_cur.x + fr->m_c) % fr->m_c] == fr->py + 32)
 					ovl++;
-				else if (fr->map[st.y + p_cur.y][st.x + p_cur.x] != '.')
+				else if (fr->map[(st.y + p_cur.y + fr->m_r) % fr->m_r][(st.x + p_cur.x + fr->m_c) % fr->m_c] != '.')
 					return (0);
 			}
 			p_cur.x++;
@@ -60,7 +57,8 @@ static void			find_available(t_filler *fr)
 			{
 				fr->avail[fr->av_ct].pt.x = cur.x;
 				fr->avail[fr->av_ct].pt.y = cur.y;
-				fr->avail[fr->av_ct++].score = 0;
+				fr->avail[fr->av_ct].score = 0;
+				fr->av_ct++;
 			}
 			cur.x++;
 		}
@@ -68,23 +66,43 @@ static void			find_available(t_filler *fr)
 	}
 }
 
-static void			first_available(t_option *avail)
-{
-	ft_printf("%d %d\n", avail[0].pt.y, avail[0].pt.x);
-}
+// static void			first_available(t_nd *avail)
+// {
+// 	int				x;
+// 	int				y;
+
+// 	x = ((t_option*)avail->data)->pt.x;
+// 	y = ((t_option*)avail->data)->pt.y;
+// 	if (x > 0)
+// 		x = x/
+// 	ft_printf("%d %d\n", ((t_option*)avail->data)->pt.y, ((t_option*)avail->data)->pt.x);
+// }
 
 void				put_piece(t_filler *fr)
 {
+	int				x;
+	int				y;
+
+
 	find_available(fr);
 	////////
 	ft_putstr_fd("Available spots: ", 2);
 	ft_putnbr_fd(fr->av_ct, 2);
 	ft_putchar_fd('\n', 2);
 	///////
-	if (fr->av_ct == 0)
+	if (!fr->avail || fr->av_ct == 0)
 	{
 		ft_printf("-1 -1\n");
 		return ;
 	}
-	first_available(fr->avail);
+	else
+	{
+		x = fr->avail[0].pt.x;
+		y = fr->avail[0].pt.y;
+		if (x > 0)
+			x = x % fr->m_c;
+		if (y > 0)
+			y = y % fr->m_r;
+		ft_printf("%d %d\n", y, x);
+	}
 }
