@@ -80,29 +80,9 @@ static void			find_available(t_filler *fr)
 
 void				put_piece(t_filler *fr)
 {
-	int				x;
-	int				y;
-
-
 	find_available(fr);
-	////////
-	ft_putstr_fd("Available spots: ", 2);
-	ft_putnbr_fd(fr->av_ct, 2);
-	ft_putchar_fd('\n', 2);
-	///////
 	if (!fr->avail || fr->av_ct == 0)
-	{
 		ft_printf("-1 -1\n");
-		return ;
-	}
 	else
-	{
-		x = fr->avail[0].pt.x;
-		y = fr->avail[0].pt.y;
-		if (x > 0)
-			x = x % fr->m_c;
-		if (y > 0)
-			y = y % fr->m_r;
-		ft_printf("%d %d\n", y, x);
-	}
+		ft_printf("%d %d\n", fr->avail[0].pt.y % fr->m_r, fr->avail[0].pt.x % fr->m_c);
 }

@@ -15,7 +15,12 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
+
+///////
+# include <fcntl.h>
 # include <unistd.h>
+//////
+
 
 typedef struct		s_pt
 {
@@ -29,6 +34,15 @@ typedef struct 		s_option
 	int				score;
 }					t_option;
 
+typedef struct 		s_stats
+{
+	t_pt			pre;
+	t_pt			ppre;
+	t_pt			near;
+	t_pt			avg; // actually sum
+	int				num_pc;
+}					t_stats;
+
 typedef struct		s_filler
 {
 	int				m_r;
@@ -40,10 +54,13 @@ typedef struct		s_filler
 	char			**pc;
 	t_option		*avail;
 	int				av_ct;
+	int				fd; // log	
 }					t_filler;
 
 int					setup_map(t_filler *fr);
-int					setup_piece(t_filler *fr);
+int					setup_piece(t_filler *fr, t_stats *st);
 void				put_piece(t_filler *fr);
+t_pt				set_pt(int x, int y);
+// void				update_prev(t_filler *fr, t_stats *st);
 
 #endif
