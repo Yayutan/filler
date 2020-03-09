@@ -39,7 +39,7 @@ typedef struct 		s_stats
 	t_pt			pre;
 	t_pt			ppre;
 	t_pt			near;
-	t_pt			avg; // actually sum
+	t_pt			sum;
 	int				num_pc;
 }					t_stats;
 
@@ -47,6 +47,7 @@ typedef struct		s_filler
 {
 	int				m_r;
 	int				m_c;
+	char			**p_map;
 	char			**map;
 	char			py;
 	int				p_r;
@@ -61,6 +62,6 @@ int					setup_map(t_filler *fr);
 int					setup_piece(t_filler *fr, t_stats *st);
 void				put_piece(t_filler *fr);
 t_pt				set_pt(int x, int y);
-// void				update_prev(t_filler *fr, t_stats *st);
+int					set_prev(t_filler *fr);
 
 #endif

@@ -66,18 +66,6 @@ static void			find_available(t_filler *fr)
 	}
 }
 
-// static void			first_available(t_nd *avail)
-// {
-// 	int				x;
-// 	int				y;
-
-// 	x = ((t_option*)avail->data)->pt.x;
-// 	y = ((t_option*)avail->data)->pt.y;
-// 	if (x > 0)
-// 		x = x/
-// 	ft_printf("%d %d\n", ((t_option*)avail->data)->pt.y, ((t_option*)avail->data)->pt.x);
-// }
-
 void				put_piece(t_filler *fr)
 {
 	find_available(fr);

@@ -23,12 +23,15 @@ t_pt				set_pt(int x, int y)
 
 static void			clean_map_pc(t_filler *fr, t_stats *st)
 {
+	if (fr->p_map)
+		ft_free_two_d_a((void**)fr->p_map);
 	if (fr->map)
 		ft_free_two_d_a((void**)fr->map);
 	if (fr->pc)
 		ft_free_two_d_a((void**)fr->pc);
 	if (fr->avail)
 		free(fr->avail);
+	fr->p_map = NULL;
 	fr->map = NULL;
 	fr->pc = NULL;
 	fr->avail = NULL;
@@ -41,7 +44,8 @@ static void		init_filler_st(t_filler *fr, t_stats *st)
 {
 	fr->m_r = -1;
 	fr->m_c = -1;
-	fr->map = NULL;
+	fr->p_map = NULL;
+	fr->map = NULL;	
 	fr->py = 0;
 	fr->p_r = -1;
 	fr->p_c = -1;
@@ -50,7 +54,7 @@ static void		init_filler_st(t_filler *fr, t_stats *st)
 	st->pre = set_pt(-1, -1);
 	st->ppre = set_pt(-1, -1);
 	st->near = set_pt(-1, -1);
-	st->avg = set_pt(0, 0);
+	st->sum = set_pt(0, 0);
 	st->num_pc = 0;
 
 	/////////
@@ -70,9 +74,9 @@ int					main(void)
 	free(line);
 	while(1)
 	{
-		if (setup_map(&fr) < 0 || setup_piece(&fr, &st) < 0)
+		if (set_prev(&fr) < 0 || setup_map(&fr) < 0 || setup_piece(&fr, &st) < 0)
 			break;
-		// update_prev(&fr, &st); 
+		// update_stats(&fr, &st);
 		put_piece(&fr);
 		clean_map_pc(&fr, &st);
 	}
