@@ -23,15 +23,15 @@ t_pt				set_pt(int x, int y)
 
 static void			clean_map_pc(t_filler *fr, t_stats *st)
 {
-	if (fr->p_map)
-		ft_free_two_d_a((void**)fr->p_map);
+	// if (fr->p_map)
+	// 	ft_free_two_d_a((void**)fr->p_map);
 	if (fr->map)
 		ft_free_two_d_a((void**)fr->map);
 	if (fr->pc)
 		ft_free_two_d_a((void**)fr->pc);
 	if (fr->avail)
 		free(fr->avail);
-	fr->p_map = NULL;
+	// fr->p_map = NULL;
 	fr->map = NULL;
 	fr->pc = NULL;
 	fr->avail = NULL;
@@ -74,10 +74,14 @@ int					main(void)
 	free(line);
 	while(1)
 	{
-		if (set_prev(&fr) < 0 || setup_map(&fr) < 0 || setup_piece(&fr, &st) < 0)
+		if (setup_map(&fr) < 0 || setup_piece(&fr, &st) < 0)
 			break;
 		// update_stats(&fr, &st);
+		if (fr.p_map)
+			prev_pt(&fr, &st);
 		put_piece(&fr);
+		if (set_prev(&fr) < 0)
+			break;
 		clean_map_pc(&fr, &st);
 	}
 	clean_map_pc(&fr, &st);

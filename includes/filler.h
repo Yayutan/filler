@@ -63,5 +63,6 @@ int					setup_piece(t_filler *fr, t_stats *st);
 void				put_piece(t_filler *fr);
 t_pt				set_pt(int x, int y);
 int					set_prev(t_filler *fr);
+void				prev_pt(t_filler *fr, t_stats *st);
 
 #endif
