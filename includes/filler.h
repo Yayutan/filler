@@ -55,7 +55,9 @@ typedef struct		s_filler
 	char			**pc;
 	t_option		*avail;
 	int				av_ct;
+	//////
 	int				fd; // log	
+	/////
 }					t_filler;
 
 int					setup_map(t_filler *fr);

@@ -24,7 +24,7 @@ static void			find_pc_dim(t_filler *fr, t_stats *st)
 	while (r < fr->p_r)
 	{
 		////////////
-		ft_putendl_fd(fr->pc[r], fr->fd);
+		// ft_putendl_fd(fr->pc[r], fr->fd);
 		////////////
 		c = 0;
 		while (c < fr->p_c)
@@ -43,37 +43,37 @@ static void			find_pc_dim(t_filler *fr, t_stats *st)
 	st->num_pc++;
 
 	////////////
-	ft_putnbr_fd(st->num_pc, fr->fd);
-	ft_putstr_fd(" piece\n", fr->fd);
+	// ft_putnbr_fd(st->num_pc, fr->fd);
+	// ft_putstr_fd(" piece\n", fr->fd);
 
-	ft_putstr_fd("GOT: (", fr->fd);
-	ft_putnbr_fd((mm[1].x - mm[0].x + 1), fr->fd);
-	ft_putstr_fd(", ", fr->fd);
-	ft_putnbr_fd((mm[1].y - mm[0].y + 1), fr->fd);
-	ft_putstr_fd(")\n", fr->fd);
+	// ft_putstr_fd("GOT: (", fr->fd);
+	// ft_putnbr_fd((mm[1].x - mm[0].x + 1), fr->fd);
+	// ft_putstr_fd(", ", fr->fd);
+	// ft_putnbr_fd((mm[1].y - mm[0].y + 1), fr->fd);
+	// ft_putstr_fd(")\n", fr->fd);
 
-	ft_putstr_fd("SUM: (", fr->fd);
-	ft_putnbr_fd(st->sum.x, fr->fd);
-	ft_putstr_fd(", ", fr->fd);
-	ft_putnbr_fd(st->sum.y, fr->fd);
-	ft_putstr_fd(") -> ", fr->fd);
+	// ft_putstr_fd("SUM: (", fr->fd);
+	// ft_putnbr_fd(st->sum.x, fr->fd);
+	// ft_putstr_fd(", ", fr->fd);
+	// ft_putnbr_fd(st->sum.y, fr->fd);
+	// ft_putstr_fd(") -> ", fr->fd);
 	///////////
 
 	st->sum = set_pt(st->sum.x + (mm[1].x - mm[0].x + 1),
 		st->sum.y + (mm[1].y - mm[0].y + 1));
 
 	////////////
-	ft_putstr_fd("(", fr->fd);
-	ft_putnbr_fd(st->sum.x, fr->fd);
-	ft_putstr_fd(", ", fr->fd);
-	ft_putnbr_fd(st->sum.y, fr->fd);
-	ft_putstr_fd(")\n", fr->fd);
+	// ft_putstr_fd("(", fr->fd);
+	// ft_putnbr_fd(st->sum.x, fr->fd);
+	// ft_putstr_fd(", ", fr->fd);
+	// ft_putnbr_fd(st->sum.y, fr->fd);
+	// ft_putstr_fd(")\n", fr->fd);
 
-	ft_putstr_fd("AVG: (", fr->fd);
-	ft_putnbr_fd(st->sum.x / st->num_pc, fr->fd);
-	ft_putstr_fd(", ", fr->fd);
-	ft_putnbr_fd(st->sum.y / st->num_pc, fr->fd);
-	ft_putstr_fd(")\n\n", fr->fd);
+	// ft_putstr_fd("AVG: (", fr->fd);
+	// ft_putnbr_fd(st->sum.x / st->num_pc, fr->fd);
+	// ft_putstr_fd(", ", fr->fd);
+	// ft_putnbr_fd(st->sum.y / st->num_pc, fr->fd);
+	// ft_putstr_fd(")\n\n", fr->fd);
 	////////////
 }
 
