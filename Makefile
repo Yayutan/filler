@@ -23,7 +23,7 @@ BLUE = "\033[0;34m"
 CYAN = "\033[0;36m"
 CLEAR = "\033[0m"
 
-SRC_NAME =	main.c read_input.c put_piece.c solve.c
+SRC_NAME =	main.c read_input.c put_piece.c stats.c
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 OBJ = $(SRC_NAME:.c=.o)

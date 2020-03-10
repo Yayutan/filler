@@ -39,14 +39,12 @@ static int			try_piece(t_filler *fr, t_pt st)
 	return (ovl == 1);
 }
 
-static void			find_available(t_filler *fr)
+static int			find_available(t_filler *fr)
 {
 	t_pt			cur;
+	t_option		*new_op;
 
 	fr->av_ct = 0;
-	if (!fr->avail)
-		if (!(fr->avail = (t_option*)ft_memalloc(fr->m_r * fr->m_c * sizeof(t_option))))
-			return ;
 	cur.y = -1 * fr->p_r;
 	while (cur.y < fr->m_r + fr->p_r)
 	{
@@ -55,22 +53,34 @@ static void			find_available(t_filler *fr)
 		{
 			if (try_piece(fr, cur))
 			{
-				fr->avail[fr->av_ct].pt.x = cur.x;
-				fr->avail[fr->av_ct].pt.y = cur.y;
-				fr->avail[fr->av_ct].score = 0;
+				if (!(new_op = (t_option*)ft_memalloc(sizeof(t_option))))
+					return (-1);
+				new_op->pt.x = cur.x;
+				new_op->pt.y = cur.y;
+				new_op->score = 0;
+				ft_lstadd(&fr->avail, ft_lstnew((void*)new_op, sizeof(t_option)));
+				free(new_op);
 				fr->av_ct++;
 			}
 			cur.x++;
 		}
 		cur.y++;
 	}
+	return (0);
 }
 
 void				put_piece(t_filler *fr)
 {
-	find_available(fr);
-	if (!fr->avail || fr->av_ct == 0)
+	t_pt			res;
+
+	if (find_available(fr) < 0 || !fr->avail || fr->av_ct == 0)
 		ft_printf("-1 -1\n");
 	else
-		ft_printf("%d %d\n", fr->avail[0].pt.y % fr->m_r, fr->avail[0].pt.x % fr->m_c);
+	{
+		ft_putstr_fd("Avail #: ", fr->fd);
+		ft_putnbr_fd(fr->av_ct, fr->fd);
+		ft_putstr_fd("\n", fr->fd);
+		res = ((t_option*)(ft_lstat(fr->avail, fr->av_ct - 1)->content))->pt;
+		ft_printf("%d %d\n", res.y % fr->m_r, res.x % fr->m_c);
+	}
 }

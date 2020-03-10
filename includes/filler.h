@@ -41,6 +41,8 @@ typedef struct 		s_stats
 	t_pt			near;
 	t_pt			sum;
 	int				num_pc;
+	t_list			*my_pt;
+	t_list			*op_pt;
 }					t_stats;
 
 typedef struct		s_filler
@@ -53,7 +55,7 @@ typedef struct		s_filler
 	int				p_r;
 	int				p_c;
 	char			**pc;
-	t_option		*avail;
+	t_list			*avail;
 	int				av_ct;
 	//////
 	int				fd; // log	
@@ -64,7 +66,7 @@ int					setup_map(t_filler *fr);
 int					setup_piece(t_filler *fr, t_stats *st);
 void				put_piece(t_filler *fr);
 t_pt				set_pt(int x, int y);
-int					set_prev(t_filler *fr);
-void				prev_pt(t_filler *fr, t_stats *st);
-
+int					set_prev_map(t_filler *fr);
+void				set_prev_pt(t_filler *fr, t_stats *st);
+int					update_pts(t_filler *fr, t_stats *st);
 #endif

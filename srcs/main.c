@@ -30,7 +30,7 @@ static void			clean_map_pc(t_filler *fr, t_stats *st)
 	if (fr->pc)
 		ft_free_two_d_a((void**)fr->pc);
 	if (fr->avail)
-		free(fr->avail);
+		ft_lstdel(&fr->avail, &free);
 	// fr->p_map = NULL;
 	fr->map = NULL;
 	fr->pc = NULL;
@@ -56,7 +56,8 @@ static void		init_filler_st(t_filler *fr, t_stats *st)
 	st->near = set_pt(-1, -1);
 	st->sum = set_pt(0, 0);
 	st->num_pc = 0;
-
+	st->my_pt = NULL;
+	st->op_pt = NULL;
 	/////////
 	fr->fd = open("log", O_RDWR | O_TRUNC, 644); // remove
 	/////////
@@ -78,14 +79,17 @@ int					main(void)
 			break;
 		// update_stats(&fr, &st);
 		if (fr.p_map)
-			prev_pt(&fr, &st);
+			set_prev_pt(&fr, &st);
+		if (update_pts(&fr, &st) < 0)
+			break;
 		put_piece(&fr);
-		if (set_prev(&fr) < 0)
+		if (set_prev_map(&fr) < 0)
 			break;
 		clean_map_pc(&fr, &st);
 	}
 	clean_map_pc(&fr, &st);
 
+	// free p_map, my_pt
 	//////
 	close(fr.fd);
 	/////
